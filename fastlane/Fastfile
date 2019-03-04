@@ -1,0 +1,19 @@
+lane :test do
+  sftp_download(
+    server_url: "example.host.com",
+    server_user: "john_doe",
+    server_password: "secret",
+    target_dir: "local/folder",
+    file_paths: ["path/to/remote_file_01.txt", "path/to/remote_folder"]
+  )
+
+  rsa_key_passphrase = UI.password("Please enter the passphrase for your RSA key file (leave empty if no passphrase is configured): ") # password inputs are hidden
+  sftp_upload(
+    server_url: "example.host.com",
+    server_user: "john_doe",
+    server_key: "#{Dir.home}/.ssh/id_rsa",
+    server_key_passphrase: rsa_key_passphrase,
+    target_dir: "remote/path/on/server",
+    file_paths: ["test_file_01.txt", "test_file_02.txt", "test_folder_01"]
+  )
+end
