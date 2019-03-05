@@ -3,7 +3,39 @@ language: ruby
 rvm:
   - 2.3.7
 
+addons:
+  hosts:
+    - sftp.server.example
+
 before_install:
-  - gem update --system
-  - gem install bundler
-  - gem install fastlane
+#  - gem update --system
+#  - gem install bundler
+#  - gem install fastlane
+#  - sudo apt-get install openssh-server
+  - sudo apt-get install openssl
+#  - sudo apt-get install sshpass
+
+
+before_script:
+#  - sudo adduser --shell /usr/sbin/nologin --no-create-home --disabled-password --gecos "SFTP Test" sftp_test
+  - sudo adduser --disabled-password --gecos "SFTP Test" sftp_test
+  - echo "sftp_test:password" | sudo chpasswd
+  #- sudo mkdir -p /var/sftp/sftp_test
+  #- sudo chown root:root /var/sftp
+  #- sudo chmod 755 /var/sftp
+  #- sudo chown sftp_test:sftp_test /var/sftp/sftp_test
+  - sudo mkdir -p /home/sftp_test/.ssh/
+  - sudo mkdir -p /home/sftp_test/download/sub_folder
+  - sudo chown sftp_test:sftp_test /home/sftp_test/download
+  - sudo chown sftp_test:sftp_test /home/sftp_test/download/sub_folder
+  - sudo touch /home/sftp_test/download/file_01.txt
+  - sudo touch /home/sftp_test/download/file_02.txt
+  - sudo touch /home/sftp_test/download/sub_folder/file_03.txt
+  - sudo touch /home/sftp_test/download/sub_folder/file_04.txt
+  - #sudo cp -f assets/ssh_config /etc/ssh/
+  - sudo cp -f assets/authorized_keys /home/sftp_test/.ssh/
+  - chmod -R go= assets/keys
+  - ssh-keyscan -H sftp.server.example >> ~/.ssh/known_hosts
+  - sudo service ssh restart
+# - sshpass -p password ssh sftp_test@sftp.server.example 'exit'
+# - sshpass -p password sftp sftp_test@sftp_test@sftp.server.example <<EOF

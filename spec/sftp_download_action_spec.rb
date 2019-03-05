@@ -1,8 +1,35 @@
 describe Fastlane::Actions::SftpDownloadAction do
   describe '#run' do
-    it 'is not yet implmentes' do
-      expect(Fastlane::UI).to receive(:message).with("TODO")
-      Fastlane::UI.message("TODO")
+    it 'downloads files from a SFTP server' do
+      ENV["DEBUG"] = "1"
+      Fastlane::Actions::SftpDownloadAction.run(
+        server_url: "sftp.server.example",
+        server_user: "sftp_test",
+        # server_password: "password",
+        server_key: "assets/keys/valid_key_no_pass",
+        target_dir: "down",
+        file_paths: ["download/file_01.txt", "download/file_02.txt", "download/file_does_not_exist.txt", "download/sub_folder"]
+      )
+      expect(File).to exist("down/file_01.txt")
+      expect(File).to exist("down/file_02.txt")
+      expect(File).to exist("down/sub_folder/file_03.txt")
+      expect(File).to exist("down/sub_folder/file_04.txt")
+    end
+
+    it 'downloads files inside a Fastlane file' do
+      Fastlane::FastFile.new.parse("lane :test do
+        sftp_download(
+          server_url: 'sftp.server.example',
+          server_user: 'sftp_test',
+          server_key: '../assets/keys/valid_key_no_pass',
+          target_dir: 'down',
+          file_paths: ['download/file_01.txt', 'download/file_02.txt', 'download/file_does_not_exist.txt', 'download/sub_folder']
+        )
+      end").runner.execute(:test)
+      expect(File).to exist("down/file_01.txt")
+      expect(File).to exist("down/file_02.txt")
+      expect(File).to exist("down/sub_folder/file_03.txt")
+      expect(File).to exist("down/sub_folder/file_04.txt")
     end
   end
 end

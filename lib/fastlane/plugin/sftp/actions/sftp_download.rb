@@ -7,7 +7,7 @@ module Fastlane
     class SftpDownloadAction < Action
       def self.run(params)
         # sh 'bundle exec rubocop -D'
-        FastlaneCore::PrintTable.print_values(config: params, hide_keys: [:server_password], mask_keys: [:server_key, :server_key_passphrase], title: "SFTP Download #{Sftp::VERSION} Summary")
+        FastlaneCore::PrintTable.print_values(config: params, mask_keys: [:server_password, :server_key, :server_key_passphrase], title: "SFTP Download #{Sftp::VERSION} Summary")
 
         UI.success('SFTP Downloader running...')
         downloader = Sftp::Downloader.new(params)

@@ -7,7 +7,7 @@ module Fastlane
     class SftpUploadAction < Action
       def self.run(params)
         # sh 'bundle exec rubocop -D'
-        FastlaneCore::PrintTable.print_values(config: params, hide_keys: [:server_password], mask_keys: [:server_key, :server_key_passphrase], title: "SFTP Upload #{Sftp::VERSION} Summary")
+        FastlaneCore::PrintTable.print_values(config: params, mask_keys: [:server_password, :server_key, :server_key_passphrase], title: "SFTP Upload #{Sftp::VERSION} Summary")
 
         UI.success('SFTP Uploader running...')
         uploader = Sftp::Uploader.new(params)

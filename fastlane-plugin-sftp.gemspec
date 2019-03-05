@@ -23,8 +23,10 @@ Gem::Specification.new do |spec|
   # since this would cause a circular dependency
 
   # spec.add_dependency('your-dependency', '~> 1.0.0')
-  spec.add_dependency('net-ssh', '~> 4.0', '>= 4.0.0')
+  spec.add_dependency('net-ssh', '~> 5.1', '>= 5.1.0')
   spec.add_dependency('net-sftp', '~> 2.1', '>= 2.1.2')
+  spec.add_dependency('ed25519', '~>1.2')
+  spec.add_dependency('bcrypt_pbkdf', '~>1.0')
 
   spec.add_development_dependency('pry')
   spec.add_development_dependency('bundler')

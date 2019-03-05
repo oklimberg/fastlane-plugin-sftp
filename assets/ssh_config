@@ -1,0 +1,14 @@
+PasswordAuthentication yes
+StrictHostKeyChecking no
+#   IdentityFile ~/.ssh/identity
+#   IdentityFile ~/.ssh/id_rsa
+#   IdentityFile ~/.ssh/id_dsa
+
+Match User sftp_test
+#ForceCommand internal-sftp
+PasswordAuthentication yes
+#ChrootDirectory /var/sftp
+#PermitTunnel no
+#AllowAgentForwarding no
+#AllowTcpForwarding no
+#X11Forwarding no
