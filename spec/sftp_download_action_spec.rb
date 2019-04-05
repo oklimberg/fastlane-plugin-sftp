@@ -32,7 +32,7 @@ describe Fastlane::Actions::SftpDownloadAction do
       expect(File).to exist("down/sub_folder/file_04.txt")
     end
 
-    it 'downloads files inside a Fastlane file 2' do
+    it 'raise an error because specifying server_password and server_key' do
       expect do
         Fastlane::FastFile.new.parse("lane :test do
           sftp_download(
@@ -47,7 +47,7 @@ describe Fastlane::Actions::SftpDownloadAction do
       end.to raise_error("You can't use 'password' and 'server_key' options in one run.")
     end
 
-    it 'downloads files inside a Fastlane file 3' do
+    it 'raise an error because specifying server_key and server_password' do
       expect do
         Fastlane::FastFile.new.parse("lane :test do
           sftp_download(
@@ -62,7 +62,7 @@ describe Fastlane::Actions::SftpDownloadAction do
       end.to raise_error("You can't use 'server_key' and 'password' options in one run.")
     end
 
-    it 'downloads files inside a Fastlane file 4' do
+    it 'raise an error because of an invalid key file path' do
       expect do
         Fastlane::FastFile.new.parse("lane :test do
           sftp_download(
