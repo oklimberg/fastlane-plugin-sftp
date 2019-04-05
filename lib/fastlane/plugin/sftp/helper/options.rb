@@ -23,7 +23,7 @@ module Fastlane
                                        description: 'PASSWORD for your server (not for production)',
                                        conflicting_options: [:server_key],
                                        conflict_block: proc do |value|
-                                         UI.user_error!("You can't use 'password' and '#{value.key}' options in one run.")
+                                         UI.user_error!("You can't use 'server_password' and '#{value.key}' options in one run.")
                                        end),
           FastlaneCore::ConfigItem.new(key: :server_key,
                                        short_option: '-k',
@@ -32,7 +32,7 @@ module Fastlane
                                        description: 'RSA key for your server',
                                        conflicting_options: [:server_password],
                                        conflict_block: proc do |value|
-                                         UI.user_error!("You can't use 'repo_key' and '#{value.key}' options in one run.")
+                                         UI.user_error!("You can't use 'server_key' and '#{value.key}' options in one run.")
                                        end),
           FastlaneCore::ConfigItem.new(key: :server_key_passphrase,
                                        short_option: '-v',

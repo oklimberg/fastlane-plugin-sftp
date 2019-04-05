@@ -44,7 +44,7 @@ describe Fastlane::Actions::SftpDownloadAction do
             file_paths: ['download/file_01.txt', 'download/file_02.txt', 'download/file_does_not_exist.txt', 'download/sub_folder']
           )
         end").runner.execute(:test)
-      end.to raise_error("You can't use 'password' and 'server_key' options in one run.")
+      end.to raise_error("You can't use 'server_password' and 'server_key' options in one run.")
     end
 
     it 'raise an error because specifying server_key and server_password' do
@@ -59,7 +59,7 @@ describe Fastlane::Actions::SftpDownloadAction do
             file_paths: ['download/file_01.txt', 'download/file_02.txt', 'download/file_does_not_exist.txt', 'download/sub_folder']
           )
         end").runner.execute(:test)
-      end.to raise_error("You can't use 'server_key' and 'password' options in one run.")
+      end.to raise_error("You can't use 'server_key' and 'server_password' options in one run.")
     end
 
     it 'raise an error because of an invalid key file path' do
