@@ -1,7 +1,7 @@
 describe Fastlane::Actions::SftpDownloadAction do
   describe '#run' do
     it 'downloads files from a SFTP server' do
-      ENV["DEBUG"] = "1"
+      # ENV["DEBUG"] = "1"
       Fastlane::Actions::SftpDownloadAction.run(
         server_url: "sftp.server.example",
         server_user: "sftp_test",
