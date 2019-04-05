@@ -33,6 +33,9 @@ module Fastlane
                                        conflicting_options: [:server_password],
                                        conflict_block: proc do |value|
                                          UI.user_error!("You can't use 'server_key' and '#{value.key}' options in one run.")
+                                       end,
+                                       verify_block: proc do |value|
+                                         UI.user_error!("Key file '#{value}' does not exist") unless File.exist?(value)
                                        end),
           FastlaneCore::ConfigItem.new(key: :server_key_passphrase,
                                        short_option: '-v',

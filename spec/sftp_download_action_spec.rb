@@ -73,7 +73,7 @@ describe Fastlane::Actions::SftpDownloadAction do
             file_paths: ['download/file_01.txt', 'download/file_02.txt', 'download/file_does_not_exist.txt', 'download/sub_folder']
           )
         end").runner.execute(:test)
-      end.to raise_error("Failed to load RSA key... /assets/keys/valid_key_no_pass")
+      end.to raise_error("Key file '/assets/keys/valid_key_no_pass' does not exist")
     end
   end
 end
