@@ -3,8 +3,6 @@ require 'fastlane/plugin/sftp/version'
 require 'fastlane'
 require 'fastlane_core'
 
-# require_relative 'apprepo/version'
-
 module Fastlane
   module Sftp
     # Return all .rb files inside the "actions" and "helper" directory
