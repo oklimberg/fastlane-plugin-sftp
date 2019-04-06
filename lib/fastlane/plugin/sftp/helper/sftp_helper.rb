@@ -29,6 +29,7 @@ module Fastlane
         end
         options = {
           verbose: logging_level,
+          non_interactive: true
         }
         if !rsa_key.nil?
           UI.message('Logging in with RSA key...')
