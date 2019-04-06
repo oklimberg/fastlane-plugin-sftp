@@ -12,7 +12,7 @@ module Fastlane
       #
 
       def self.login(host, user, password, rsa_keypath, rsa_keypath_passphrase)
-        if host.nil? || user.nil?
+        if host.nil? || user.nil? || (password.nil? && rsa_keypath.nil?)
           UI.user_error('server_url, server_user and server_password or server_key must be set')
           return nil
         end
