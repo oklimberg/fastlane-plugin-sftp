@@ -13,14 +13,13 @@ module Fastlane
 
       def self.login(host, user, password, rsa_keypath, rsa_keypath_passphrase)
         if host.nil? || user.nil? || (password.nil? && rsa_keypath.nil?)
-          UI.user_error('server_url, server_user and server_password or server_key must be set')
-          return nil
+          UI.user_error!('server_url, server_user and server_password or server_key must be set')
         end
 
         if rsa_keypath
           rsa_key = Helper::SftpHelper.load_rsa_key(rsa_keypath)
           if rsa_key.nil?
-            UI.user_error("Failed to load RSA key... #{rsa_keypath}")
+            UI.user_error!("Failed to load RSA key... #{rsa_keypath}")
           end
         end
 
