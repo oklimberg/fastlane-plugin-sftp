@@ -27,15 +27,25 @@ module Fastlane
         if ENV["DEBUG"] == "1"
           logging_level = :debug
         end
-
+        options = {
+          verbose: logging_level,
+        }
         if !rsa_key.nil?
           UI.message('Logging in with RSA key...')
-          session = Net::SSH.start(host, user, key_data: rsa_key, keys_only: true, passphrase: rsa_keypath_passphrase, auth_methods: ["publickey"], verbose: logging_level)
+          options = options.merge({
+            key_data: rsa_key,
+            keys_only: true,
+            passphrase: rsa_keypath_passphrase,
+            auth_methods: ["publickey"]
+          })
         else
           UI.message('Logging in with username/password...')
-          session = Net::SSH.start(host, user, password: password, auth_methods: ["password"], verbose: logging_level)
+          options = options.merge({
+            password: password,
+            auth_methods: ["password"]
+          })
         end
-        return session
+        return Net::SSH.start(host, user, options)
       end
 
       # Check file existence locally
