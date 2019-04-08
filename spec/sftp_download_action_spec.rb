@@ -44,6 +44,20 @@ describe Fastlane::Actions::SftpDownloadAction do
       end.to raise_error("Key file '/assets/keys/valid_key_no_pass' does not exist")
     end
 
+    it('raise an error because of empty list of files to download') {
+      expect do
+        Fastlane::FastFile.new.parse("lane :test do
+          sftp_download(
+            server_url: 'sftp.server.example',
+            server_user: 'sftp_test',
+            server_key: '../assets/keys/valid_key_no_pass',
+            target_dir: 'down',
+            file_paths: []
+          )
+        end").runner.execute(:test)
+      end.to raise_error("you must provide at least one file to download")
+    }
+
     it 'downloads files from a SFTP server' do
       # ENV["DEBUG"] = "1"
       Fastlane::Actions::SftpDownloadAction.run(
@@ -75,5 +89,17 @@ describe Fastlane::Actions::SftpDownloadAction do
       expect(File).to exist("down/sub_folder/file_03.txt")
       expect(File).to exist("down/sub_folder/file_04.txt")
     end
+  end
+
+  describe('metadata') do
+    it('check metadata of action sftp_download') {
+      expect(Fastlane::Actions::SftpDownloadAction.description).to(eq("download files from a remote Server via SFTP"))
+      expect(Fastlane::Actions::SftpDownloadAction.details).to(eq("More information: https://github.com/oklimberg/fastlane-plugin-sftp/"))
+      expect(Fastlane::Actions::SftpDownloadAction.author).to(eq("oklimberg"))
+      expect(Fastlane::Actions::SftpDownloadAction.is_supported?(:ios)).to(be(true))
+      expect(Fastlane::Actions::SftpDownloadAction.is_supported?(:android)).to(be(true))
+      expect(Fastlane::Actions::SftpDownloadAction.is_supported?(:mac)).to(be(true))
+      expect(Fastlane::Actions::SftpDownloadAction.category).to(be(:misc))
+    }
   end
 end
