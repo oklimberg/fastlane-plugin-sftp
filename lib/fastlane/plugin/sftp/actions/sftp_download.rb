@@ -26,20 +26,23 @@ module Fastlane
       end
 
       def self.details
-        # Optional:
-        "TODO"
+        "More information: https://github.com/oklimberg/fastlane-plugin-sftp/"
       end
 
       def self.available_options
         Sftp::Options.available_options_download
       end
 
-      def self.authors
-        ['oklimberg@gmail.com']
+      def self.author
+        'oklimberg'
       end
 
       def self.is_supported?(platform)
         true
+      end
+
+      def self.category
+        :misc
       end
     end
   end

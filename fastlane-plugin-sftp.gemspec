@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'fastlane-plugin-sftp'
   spec.version       = Fastlane::Sftp::VERSION
   spec.author        = 'Oliver Limberg'
-  spec.email         = 'o.limberg@portrix.net'
+  spec.email         = 'oklimberg@gmail'
 
   spec.summary       = 'Plugin to upload files via SFTP'
   spec.homepage      = "https://github.com/oklimberg/fastlane-plugin-sftp"
