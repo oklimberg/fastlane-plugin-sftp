@@ -17,10 +17,8 @@ module Fastlane
         end
 
         if rsa_keypath
+          # will raise an excetion if file is empty
           rsa_key = Helper::SftpHelper.load_rsa_key(rsa_keypath)
-          if rsa_key.nil?
-            UI.user_error!("Failed to load RSA key... #{rsa_keypath}")
-          end
         end
 
         logging_level = :warn
