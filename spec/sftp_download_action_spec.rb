@@ -90,10 +90,10 @@ describe Fastlane::Actions::SftpDownloadAction do
           file_paths: ['download/file_01.txt', 'download/file_02.txt', 'download/file_does_not_exist.txt', 'download/sub_folder']
         )
       end").runner.execute(:test)
-      expect(File).to exist("down/file_01.txt")
-      expect(File).to exist("down/file_02.txt")
-      expect(File).to exist("down/sub_folder/file_03.txt")
-      expect(File).to exist("down/sub_folder/file_04.txt")
+      expect(File).to exist("fastlane/down/file_01.txt")
+      expect(File).to exist("fastlane/down/file_02.txt")
+      expect(File).to exist("fastlane/down/sub_folder/file_03.txt")
+      expect(File).to exist("fastlane/down/sub_folder/file_04.txt")
     end
   end
 
