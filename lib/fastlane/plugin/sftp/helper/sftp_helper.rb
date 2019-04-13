@@ -88,7 +88,7 @@ module Fastlane
         if user != "root"
           path = File.join('/home', path)
         end
-        path
+        return path
       end
     end
   end
