@@ -74,15 +74,15 @@ module Fastlane
       end
 
       def self.load_rsa_key(rsa_keypath)
-        File.open(rsa_keypath, 'r') do |file|
-          rsa_key = [file.read]
-          if !rsa_key.nil?
-            UI.success('Successfully loaded RSA key...')
-          else
-            UI.user_error!('Failed to load RSA key...')
-          end
-          rsa_key
+        UI.user_error!("RSA key file #{rsa_keypath} does not exist") unless check_file(rsa_keypath)
+
+        rsa_key = IO.read(rsa_keypath)
+        if !rsa_key.to_s.empty?
+          UI.success('Successfully loaded RSA key...')
+        else
+          UI.user_error!("Failed to load RSA key... #{rsa_keypath}")
         end
+        return rsa_key
       end
 
       def self.generate_remote_path(user, target_dir)
