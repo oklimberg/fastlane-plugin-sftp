@@ -92,7 +92,7 @@ module Fastlane
         else
           type = "folder"
         end
-        UI.message("starting upload of #{type} #{local_file_path} to #{local_file_path}")
+        UI.message("starting upload of #{type} #{local_file_path} to #{remote_file_path}")
         return sftp.upload(local_file_path, remote_file_path) do |event, _uploader, *args|
           case event
           when :mkdir then
