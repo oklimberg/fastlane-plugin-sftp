@@ -1,4 +1,10 @@
 describe Fastlane::Actions::SftpDownloadAction do
+  after(:each) do
+    ENV["DEBUG"] = "0"
+    FileUtils.remove_dir("down") if File.directory?("down")
+    FileUtils.remove_dir("fastlane/down") if File.directory?("fastlane/down")
+  end
+
   describe '#run' do
     it 'raise an error because specifying server_password and server_key' do
       expect do
