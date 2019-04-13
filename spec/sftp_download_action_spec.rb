@@ -69,7 +69,6 @@ describe Fastlane::Actions::SftpDownloadAction do
       Fastlane::Actions::SftpDownloadAction.run(
         server_url: "sftp.server.example",
         server_user: "sftp_test",
-        # server_password: "password",
         server_key: "assets/keys/valid_key_no_pass",
         target_dir: "down",
         file_paths: ["download/file_01.txt", "download/file_02.txt", "download/file_does_not_exist.txt", "download/sub_folder"]
