@@ -5,7 +5,7 @@ describe Fastlane::Actions::SftpUploadAction do
 
   describe '#run' do
     it 'uploads files to a SFTP server' do
-      # ENV["DEBUG"] = "1"
+      ENV["DEBUG"] = "1"
       Fastlane::Actions::SftpUploadAction.run(
         server_url: "sftp.server.example",
         server_user: "sftp_test",
