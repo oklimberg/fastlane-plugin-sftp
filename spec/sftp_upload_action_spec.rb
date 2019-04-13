@@ -1,4 +1,8 @@
 describe Fastlane::Actions::SftpUploadAction do
+  after(:each) do
+    ENV["DEBUG"] = "0"
+  end
+
   describe '#run' do
     it 'uploads files to a SFTP server' do
       # ENV["DEBUG"] = "1"
