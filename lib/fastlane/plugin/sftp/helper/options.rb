@@ -27,7 +27,7 @@ module Fastlane
                                        end),
           FastlaneCore::ConfigItem.new(key: :server_key,
                                        short_option: '-k',
-                                       optional: false,
+                                       optional: true,
                                        env_name: 'SERVER_KEY',
                                        description: 'RSA key for your server',
                                        conflicting_options: [:server_password],
