@@ -67,6 +67,8 @@ module Fastlane
         downloads = []
         source_files.each do |source|
           begin
+            UI.message('Checking remote file')
+            UI.message("remote path #{source}")
             attrs = sftp.stat!(source)
             if attrs.directory?
               children = []
@@ -93,27 +95,15 @@ module Fastlane
       # @param [String] remote_file_path
       # @param [String] local_file_path
       def download_file(sftp, remote_file_path, local_file_path)
-        UI.message('Checking remote file')
-        UI.message("remote path #{remote_file_path}")
-        download = nil
-        begin
-          sftp.stat!(remote_file_path) do |response|
-            if response.ok?
-              UI.success('Loading remote file:')
-              download = sftp.download(remote_file_path, local_file_path) do |event, _uploader, *_args|
-                case event
-                when :open then
-                  UI.message("starting download of file #{remote_file_path} to #{local_file_path}")
-                when :finish then
-                  UI.success("download of file #{remote_file_path} to #{local_file_path} successful")
-                end
-              end
-            end
+        UI.success('Loading remote file:')
+        return sftp.download(remote_file_path, local_file_path) do |event, _uploader, *_args|
+          case event
+          when :open then
+            UI.message("starting download of file #{remote_file_path} to #{local_file_path}")
+          when :finish then
+            UI.success("download of file #{remote_file_path} to #{local_file_path} successful")
           end
-        rescue => e
-          UI.message("remote file not found #{e}")
         end
-        return download
       end
     end
   end

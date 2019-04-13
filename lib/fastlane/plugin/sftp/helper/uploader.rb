@@ -80,11 +80,6 @@ module Fastlane
       # @param [String] local_file_path
       # @param [String] remote_file_path
       def upload_file(sftp, local_file_path, remote_file_path)
-        unless Helper::SftpHelper.check_file(local_file_path)
-          UI.message("local file #{local_file_path} not found #{e}")
-          return
-        end
-
         if File.file?(local_file_path)
           type = "file"
         else
