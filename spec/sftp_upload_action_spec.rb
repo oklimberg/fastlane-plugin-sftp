@@ -16,6 +16,19 @@ describe Fastlane::Actions::SftpUploadAction do
       expect(File).to exist("/home/sftp_test/test/test_folder/test_file_04.txt")
     end
 
+    it 'uploads files to a SFTP server into existing folder' do
+      # ENV["DEBUG"] = "1"
+      Fastlane::Actions::SftpUploadAction.run(
+        server_url: "sftp.server.example",
+        server_user: "sftp_test",
+        server_password: "password",
+        target_dir: "existing_upload_folder",
+        file_paths: ["assets/test_file_01.txt", "assets/test_file_02.txt"]
+      )
+      expect(File).to exist("/home/sftp_test/existing_upload_folder/test_file_01.txt")
+      expect(File).to exist("/home/sftp_test/existing_upload_folder/test_file_02.txt")
+    end
+
     it('raise an error because of empty list of files to upload') {
       expect do
         Fastlane::FastFile.new.parse("lane :test do

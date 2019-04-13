@@ -53,4 +53,20 @@ describe Fastlane::Helper::SftpHelper do
       end.to(raise_exception("Decrypt failed on private key"))
     end
   end
+
+  describe 'load RSA key' do
+    it('raise error loading empty file') {
+      key_file_path = 'assets/keys/invalid_key_read_error'
+      expect do
+        Fastlane::Helper::SftpHelper.load_rsa_key(key_file_path)
+      end.to(raise_exception("Failed to load RSA key... #{key_file_path}"))
+    }
+
+    it('raise error loading non existing file') {
+      key_file_path = 'assets/keys/not_existing_file'
+      expect do
+        Fastlane::Helper::SftpHelper.load_rsa_key(key_file_path)
+      end.to(raise_exception("RSA key file #{key_file_path} does not exist"))
+    }
+  end
 end
