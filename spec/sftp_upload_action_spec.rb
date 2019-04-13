@@ -6,7 +6,6 @@ describe Fastlane::Actions::SftpUploadAction do
         server_url: "sftp.server.example",
         server_user: "sftp_test",
         server_password: "password",
-        # server_key: "assets/keys/valid_key_no_pass",
         target_dir: "test_01",
         file_paths: ["assets/test_file_01.txt", "assets/test_file_02.txt", "assets/test_folder"]
       )
