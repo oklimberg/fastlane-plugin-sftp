@@ -7,13 +7,14 @@ describe Fastlane::Actions::SftpUploadAction do
         server_user: "sftp_test",
         server_password: "password",
         # server_key: "assets/keys/valid_key_no_pass",
-        target_dir: "test",
+        target_dir: "test_01",
         file_paths: ["assets/test_file_01.txt", "assets/test_file_02.txt", "assets/test_folder"]
       )
-      expect(File).to exist("/home/sftp_test/test/test_file_01.txt")
-      expect(File).to exist("/home/sftp_test/test/test_file_02.txt")
-      expect(File).to exist("/home/sftp_test/test/test_folder/test_file_03.txt")
-      expect(File).to exist("/home/sftp_test/test/test_folder/test_file_04.txt")
+      expect(File).to exist("/home/sftp_test/test_01/test_file_01.txt")
+      expect(File).to exist("/home/sftp_test/test_01/test_file_02.txt")
+      expect(File).to exist("/home/sftp_test/test_01/test_folder/test_file_03.txt")
+      expect(File).to exist("/home/sftp_test/test_01/test_folder/test_file_04.txt")
+      expect(File).to exist("/home/sftp_test/test_01/test_folder/test_sub_folder/test_file_05.txt")
     end
 
     it 'uploads files to a SFTP server into existing folder' do
@@ -36,7 +37,7 @@ describe Fastlane::Actions::SftpUploadAction do
             server_url: 'sftp.server.example',
             server_user: 'sftp_test',
             server_password: 'password',
-            target_dir: 'test',
+            target_dir: 'test_02',
             file_paths: []
           )
         end").runner.execute(:test)
@@ -50,7 +51,7 @@ describe Fastlane::Actions::SftpUploadAction do
             server_url: 'sftp.server.example',
             server_user: 'sftp_test',
             server_password: 'password',
-            target_dir: 'test',
+            target_dir: 'test_03',
             file_paths: ['../assets/test_file_does_not_exist.txt']
           )
         end").runner.execute(:test)
