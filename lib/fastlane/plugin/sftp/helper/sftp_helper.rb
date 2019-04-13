@@ -65,9 +65,12 @@ module Fastlane
       end
 
       def self.remote_mkdir(sftp, remote_path)
-        sftp.mkdir(remote_path)
+        sftp.mkdir!(remote_path)
       rescue Net::SFTP::StatusException => e
-        raise if e.code != 11
+        # the returned code depends on the implementation of the SFTP server
+        # we handle code FX_FILE_ALREADY_EXISTS and FX_FAILURE the same
+        codes = Net::SFTP::Constants::StatusCodes
+        raise if e.code != codes::FX_FAILURE && e.code != codes::FX_FILE_ALREADY_EXISTS
         UI.message("Remote dir #{remote_path} exists.")
       end
 
