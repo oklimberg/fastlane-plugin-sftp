@@ -8,6 +8,8 @@ describe Fastlane::Actions::SftpDownloadAction do
   describe '#run' do
     it 'raise an error because specifying server_password and server_key' do
       expect do
+        # debug mode must be enabled before running the first test to see all fastlane output
+        # ENV["DEBUG"] = "1"
         Fastlane::FastFile.new.parse("lane :test do
           sftp_download(
             server_url: 'sftp.server.example',
