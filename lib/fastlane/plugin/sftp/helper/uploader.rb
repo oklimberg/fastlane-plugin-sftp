@@ -45,10 +45,8 @@ module Fastlane
         UI.message('upload...')
 
         session = Helper::SftpHelper.login(host, user, password, rsa_keypath, rsa_keypath_passphrase)
-        if session.nil?
-          return false
-        end
         UI.message('Uploading files...')
+
         session.sftp.connect do |sftp|
           Helper::SftpHelper.remote_mkdir(sftp, Helper::SftpHelper.generate_remote_path(user, target_dir))
           path = target_dir
