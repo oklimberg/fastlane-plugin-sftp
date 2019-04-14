@@ -104,6 +104,7 @@ module Fastlane
               key: :target_dir,
               short_option: '-t',
               description: 'server port number'
+            ),
             FastlaneCore::ConfigItem.new(
               key: :file_paths,
               short_option: '-j',
