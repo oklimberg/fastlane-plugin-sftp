@@ -59,7 +59,6 @@ module Fastlane
             Helper::SftpHelper.remote_mkdir(sftp, path_value)
           end
 
-          path = target_dir
 
           uploads = []
           files.each do |file|
@@ -74,7 +73,7 @@ module Fastlane
           uploads.each(&:wait)
 
           # Lists the entries in a directory for verification
-          sftp.dir.foreach(path) do |entry|
+          sftp.dir.foreach(target_dir) do |entry|
             UI.message(entry.longname)
           end
         end
