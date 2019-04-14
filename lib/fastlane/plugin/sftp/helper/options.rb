@@ -73,7 +73,7 @@ module Fastlane
               description: 'target path on the server'
             ),
             FastlaneCore::ConfigItem.new(
-              key: :target_dir,
+              key: :port,
               short_option: '-t',
               description: 'server port number'
             ),
@@ -101,7 +101,7 @@ module Fastlane
               description: 'local target path to a folder where all downloaded files should be put'
             ),
             FastlaneCore::ConfigItem.new(
-              key: :target_dir,
+              key: :port,
               short_option: '-t',
               description: 'server port number'
             ),
