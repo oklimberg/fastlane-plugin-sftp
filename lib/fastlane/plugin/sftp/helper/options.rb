@@ -73,11 +73,6 @@ module Fastlane
               description: 'target path on the server'
             ),
             FastlaneCore::ConfigItem.new(
-              key: :port,
-              short_option: '-t',
-              description: 'server port number'
-            ),
-            FastlaneCore::ConfigItem.new(
               key: :file_paths,
               short_option: '-j',
               description: 'List of files/folders to upload',
@@ -99,11 +94,6 @@ module Fastlane
               short_option: '-x',
               optional: true,
               description: 'local target path to a folder where all downloaded files should be put'
-            ),
-            FastlaneCore::ConfigItem.new(
-              key: :port,
-              short_option: '-t',
-              description: 'server port number'
             ),
             FastlaneCore::ConfigItem.new(
               key: :file_paths,
