@@ -50,16 +50,7 @@ module Fastlane
         UI.message('Uploading files...')
 
         session.sftp.connect do |sftp|
-          #Helper::SftpHelper.remote_mkdir(sftp, Helper::SftpHelper.generate_remote_path(user, target_dir))
-          path_parts = Pathname(target_dir).each_filename.to_a
-          UI.message("Pathparts = #{path_parts}")
-          path_value = ""
-          path_parts.each do |path|
-            path_value = path_value + File::SEPARATOR + path
-            Helper::SftpHelper.remote_mkdir(sftp, path_value)
-          end
-
-
+          Helper::SftpHelper.remote_mkdir(sftp, target_dir)
           uploads = []
           files.each do |file|
             next unless Helper::SftpHelper.check_file(file)

@@ -69,13 +69,38 @@ module Fastlane
       end
 
       def self.remote_mkdir(sftp, remote_path)
-        sftp.mkdir!(remote_path)
+        return if remote_dir_exists?(sftp, remote_path)
+
+        path_parts = Pathname(remote_path).each_filename.to_a
+        UI.message("Pathparts = #{path_parts}")
+        path_value = remote_path.start_with?("/") ? "" : "."
+        path_parts.each do |path|
+          begin
+            path_value = path_value + File::SEPARATOR + path
+            UI.message("creating #{path_value}")
+            sftp.mkdir!(path_value)
+          rescue Net::SFTP::StatusException => e
+            # ignoring all errors while creating sub paths
+            UI.message("operation failed: #{e.message}")
+          end
+        end
+
+        # check for existence again
+        folder_exists = remote_dir_exists?(sftp, remote_path)
+        UI.user_error!("remote folder #{remote_path} does not exist and could not be created") unless folder_exists
+      end
+
+      def self.remote_dir_exists?(sftp, remote_path)
+        UI.message("Checking remote directory #{remote_path}")
+        attrs = sftp.stat!(remote_path)
+        UI.user_error!("Path #{remote_path} is not a directory") unless attrs.directory?
+        return true
       rescue Net::SFTP::StatusException => e
-        # the returned code depends on the implementation of the SFTP server
-        # we handle code FX_FILE_ALREADY_EXISTS and FX_FAILURE the same
+        # directory does not exist, we have to create it
         codes = Net::SFTP::Constants::StatusCodes
-        raise if e.code != codes::FX_FAILURE && e.code != codes::FX_FILE_ALREADY_EXISTS
-        UI.message("Remote dir #{remote_path} exists.")
+        raise if e.code != codes::FX_NO_SUCH_FILE && e.code != codes::FX_NO_SUCH_PATH
+        UI.message("Remote directory #{remote_path} does not exist")
+        return false
       end
 
       def self.load_rsa_key(rsa_keypath)
