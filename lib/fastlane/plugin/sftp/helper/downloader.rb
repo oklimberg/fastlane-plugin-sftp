@@ -49,8 +49,7 @@ module Fastlane
         UI.message('Downloading files...')
 
         session.sftp.connect do |sftp|
-          source_files = files.map { |entry| Helper::SftpHelper.generate_remote_path(user, entry) }
-          downloads = sftp_download(sftp, source_files, target_dir)
+          downloads = sftp_download(sftp, files, target_dir)
           downloads.each(&:wait)
 
           # Lists the entries in a directory for verification
