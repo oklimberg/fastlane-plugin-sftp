@@ -29,6 +29,10 @@ module Fastlane
           verbose: logging_level,
           non_interactive: true
         }
+        unless port.nil?
+          UI.message("Using custom port #{port}...")
+          options[:port] = port
+        end
         if !rsa_key.nil?
           UI.message('Logging in with RSA key...')
           options = options.merge({
@@ -42,12 +46,6 @@ module Fastlane
           options = options.merge({
             password: password,
             auth_methods: ["password"]
-          })
-        end
-        if !port.nil? 
-          UI.message("Using custom port #{port}...")
-          options = options.merge({
-            port: port
           })
         end
         return Net::SSH.start(host, user, options)
