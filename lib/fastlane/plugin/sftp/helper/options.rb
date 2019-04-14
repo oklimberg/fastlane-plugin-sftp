@@ -42,6 +42,15 @@ module Fastlane
                                        optional: true,
                                        env_name: 'SERVER_KEY_PASSPHRASE',
                                        description: 'Optional passphrase for the RSA key for your server. If required but not provided, user will be asked for')
+          FastlaneCore::ConfigItem.new(
+            key: :server_port,
+            short_option: '-t',
+            optional: true,
+            env_name: 'SERVER_PORT',
+            type: Integer,
+            description: 'PORT used to connect to the server. Defaults to 22',
+            default_value: 22
+          ),
         ]
       end
 
@@ -59,9 +68,6 @@ module Fastlane
                                             UI.user_error!("you must provide at least one file to upload") if value.empty?
                                             value.each { |entry| UI.user_error!("file '#{entry}' does not exist") unless File.exist?(entry) }
                                           end),
-            FastlaneCore::ConfigItem.new(key: :port,
-                                          short_option: '-t',
-                                          description: 'The servers port number'),
           ]
         )
       end
@@ -80,9 +86,6 @@ module Fastlane
                                           verify_block: proc do |value|
                                             UI.user_error!("you must provide at least one file to download") if value.empty?
                                           end),
-            FastlaneCore::ConfigItem.new(key: :port,
-                                          short_option: '-t',
-                                          description: 'The servers port number'),
           ]
         )
       end

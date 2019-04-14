@@ -17,6 +17,7 @@ module Fastlane
       #
 
       attr_accessor :host
+      attr_accessor :port
       attr_accessor :user
       attr_accessor :password
       attr_accessor :rsa_keypath
@@ -24,18 +25,17 @@ module Fastlane
       attr_accessor :target_dir
       attr_accessor :root_path
       attr_accessor :files
-      attr_accessor :port
 
       def initialize(options)
         self.options = options unless options.nil?
         self.host = options[:server_url]
+        self.port = options[:server_port]
         self.user = options[:server_user]
         self.password = options[:server_password]
         self.rsa_keypath = options[:server_key]
         self.rsa_keypath_passphrase = options[:server_key_passphrase]
         self.files = options[:file_paths]
         self.target_dir = options[:target_dir]
-        self.port = options[:port]
       end
 
       #
