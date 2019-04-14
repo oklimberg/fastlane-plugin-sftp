@@ -89,14 +89,6 @@ module Fastlane
         end
         return rsa_key
       end
-
-      def self.generate_remote_path(user, target_dir)
-        path = File.join('/', user, target_dir)
-        if user != "root"
-          path = File.join('/home', path)
-        end
-        return path
-      end
     end
   end
 end
