@@ -46,7 +46,7 @@ module Fastlane
         # Login & Upload all files using RSA key or username/password
         UI.message('upload...')
 
-        session = Helper::SftpHelper.login(host, user, password, rsa_keypath, rsa_keypath_passphrase, port)
+        session = Helper::SftpHelper.login(host, port, user, password, rsa_keypath, rsa_keypath_passphrase)
         UI.message('Uploading files...')
 
         session.sftp.connect do |sftp|

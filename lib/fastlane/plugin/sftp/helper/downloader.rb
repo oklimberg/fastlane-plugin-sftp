@@ -45,7 +45,7 @@ module Fastlane
       def download
         # Login & Download all files using RSA key or username/password
         UI.message('download...')
-        session = Helper::SftpHelper.login(host, user, password, rsa_keypath, rsa_keypath_passphrase, port)
+        session = Helper::SftpHelper.login(host, port, user, password, rsa_keypath, rsa_keypath_passphrase)
         UI.message('Downloading files...')
 
         session.sftp.connect do |sftp|
