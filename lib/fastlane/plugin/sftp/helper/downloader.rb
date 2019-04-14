@@ -24,6 +24,7 @@ module Fastlane
       attr_accessor :target_dir
       attr_accessor :root_path
       attr_accessor :files
+      attr_accessor :port
 
       def initialize(options)
         self.options = options unless options.nil?
@@ -34,6 +35,7 @@ module Fastlane
         self.rsa_keypath_passphrase = options[:server_key_passphrase]
         self.files = options[:file_paths]
         self.target_dir = options[:target_dir]
+        self.port = options[:port]
       end
 
       #
@@ -43,7 +45,7 @@ module Fastlane
       def download
         # Login & Download all files using RSA key or username/password
         UI.message('download...')
-        session = Helper::SftpHelper.login(host, user, password, rsa_keypath, rsa_keypath_passphrase)
+        session = Helper::SftpHelper.login(host, user, password, rsa_keypath, rsa_keypath_passphrase, port)
         UI.message('Downloading files...')
 
         session.sftp.connect do |sftp|

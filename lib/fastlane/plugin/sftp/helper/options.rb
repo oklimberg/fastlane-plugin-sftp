@@ -58,7 +58,10 @@ module Fastlane
                                           verify_block: proc do |value|
                                             UI.user_error!("you must provide at least one file to upload") if value.empty?
                                             value.each { |entry| UI.user_error!("file '#{entry}' does not exist") unless File.exist?(entry) }
-                                          end)
+                                          end),
+            FastlaneCore::ConfigItem.new(key: :port,
+                                          short_option: '-t',
+                                          description: 'The servers port number'),
           ]
         )
       end
@@ -76,7 +79,10 @@ module Fastlane
                                           type: Array,
                                           verify_block: proc do |value|
                                             UI.user_error!("you must provide at least one file to download") if value.empty?
-                                          end)
+                                          end),
+            FastlaneCore::ConfigItem.new(key: :port,
+                                          short_option: '-t',
+                                          description: 'The servers port number'),
           ]
         )
       end

@@ -11,7 +11,7 @@ module Fastlane
       # as `Helper::SftpHelper.your_method`
       #
 
-      def self.login(host, user, password, rsa_keypath, rsa_keypath_passphrase)
+      def self.login(host, user, password, rsa_keypath, rsa_keypath_passphrase, port)
         if host.nil? || user.nil? || (password.nil? && rsa_keypath.nil?)
           UI.user_error!('server_url, server_user and server_password or server_key must be set')
         end
@@ -42,6 +42,12 @@ module Fastlane
           options = options.merge({
             password: password,
             auth_methods: ["password"]
+          })
+        end
+        if !port.nil? 
+          UI.message("Using custom port #{port}...")
+          options = options.merge({
+            port: port
           })
         end
         return Net::SSH.start(host, user, options)
