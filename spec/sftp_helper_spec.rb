@@ -32,8 +32,19 @@ describe Fastlane::Helper::SftpHelper do
       end.to raise_exception('server_url, server_user and server_password or server_key must be set')
     end
 
+    it 'raise error because of wrong port' do
+      expect do
+        Fastlane::Helper::SftpHelper.login("sftp.server.example", 666, "sftp_test", "password", nil, nil)
+      end.to raise_exception('Connection refused - connect(2) for 127.0.0.1:666')
+    end
+
     it 'succeed with user & password' do
       sftp = Fastlane::Helper::SftpHelper.login("sftp.server.example", nil, "sftp_test", "password", nil, nil)
+      expect(sftp).not_to(be_nil)
+    end
+
+    it 'succeed with user & password and custom port' do
+      sftp = Fastlane::Helper::SftpHelper.login("sftp.server.example", 34_567, "sftp_test", "password", nil, nil)
       expect(sftp).not_to(be_nil)
     end
 

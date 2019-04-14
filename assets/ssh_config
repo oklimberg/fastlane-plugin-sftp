@@ -1,5 +1,7 @@
 PasswordAuthentication yes
 StrictHostKeyChecking no
+Port 22
+Port 34567
 #   IdentityFile ~/.ssh/identity
 #   IdentityFile ~/.ssh/id_rsa
 #   IdentityFile ~/.ssh/id_dsa
