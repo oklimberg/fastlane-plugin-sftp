@@ -25,6 +25,8 @@ before_script:
   - sudo touch /home/sftp_test/download/file_02.txt
   - sudo touch /home/sftp_test/download/sub_folder/file_03.txt
   - sudo touch /home/sftp_test/download/sub_folder/file_04.txt
+  - sudo cat /etc/ssh/sshd_config
+  - sudo cp -f assets/sshd_config /etc/ssh/
   - sudo cp -f assets/authorized_keys /home/sftp_test/.ssh/
   - chmod -R go= assets/keys
   - ssh-keyscan -H sftp.server.example >> ~/.ssh/known_hosts
