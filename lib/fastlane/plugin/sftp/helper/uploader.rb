@@ -17,6 +17,7 @@ module Fastlane
       #
 
       attr_accessor :host
+      attr_accessor :port
       attr_accessor :user
       attr_accessor :password
       attr_accessor :rsa_keypath
@@ -28,6 +29,7 @@ module Fastlane
       def initialize(options)
         self.options = options unless options.nil?
         self.host = options[:server_url]
+        self.port = options[:server_port]
         self.user = options[:server_user]
         self.password = options[:server_password]
         self.rsa_keypath = options[:server_key]
@@ -44,13 +46,11 @@ module Fastlane
         # Login & Upload all files using RSA key or username/password
         UI.message('upload...')
 
-        session = Helper::SftpHelper.login(host, user, password, rsa_keypath, rsa_keypath_passphrase)
+        session = Helper::SftpHelper.login(host, port, user, password, rsa_keypath, rsa_keypath_passphrase)
         UI.message('Uploading files...')
 
         session.sftp.connect do |sftp|
-          Helper::SftpHelper.remote_mkdir(sftp, Helper::SftpHelper.generate_remote_path(user, target_dir))
-          path = target_dir
-
+          Helper::SftpHelper.remote_mkdir(sftp, target_dir)
           uploads = []
           files.each do |file|
             next unless Helper::SftpHelper.check_file(file)
@@ -64,7 +64,7 @@ module Fastlane
           uploads.each(&:wait)
 
           # Lists the entries in a directory for verification
-          sftp.dir.foreach(path) do |entry|
+          sftp.dir.foreach(target_dir) do |entry|
             UI.message(entry.longname)
           end
         end

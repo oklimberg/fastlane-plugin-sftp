@@ -16,6 +16,8 @@ before_script:
   - sudo mkdir -p /home/sftp_test/.ssh/
   - sudo mkdir -p /home/sftp_test/existing_upload_folder/
   - sudo chown sftp_test:sftp_test /home/sftp_test/existing_upload_folder
+  - sudo mkdir -p /var/ftp/sftp_test/
+  - sudo chown sftp_test:sftp_test /var/ftp/sftp_test/
   - sudo mkdir -p /home/sftp_test/download/sub_folder
   - sudo chown sftp_test:sftp_test /home/sftp_test/download
   - sudo chown sftp_test:sftp_test /home/sftp_test/download/sub_folder
@@ -23,6 +25,8 @@ before_script:
   - sudo touch /home/sftp_test/download/file_02.txt
   - sudo touch /home/sftp_test/download/sub_folder/file_03.txt
   - sudo touch /home/sftp_test/download/sub_folder/file_04.txt
+  - sudo cat /etc/ssh/sshd_config
+  - sudo cp -f assets/sshd_config /etc/ssh/
   - sudo cp -f assets/authorized_keys /home/sftp_test/.ssh/
   - chmod -R go= assets/keys
   - ssh-keyscan -H sftp.server.example >> ~/.ssh/known_hosts
