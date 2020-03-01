@@ -90,6 +90,37 @@ module Fastlane
         UI.user_error!("remote folder #{remote_path} does not exist and could not be created") unless folder_exists
       end
 
+      def self.remote_rmdir(sftp, remote_path)
+        return unless remote_dir_exists?(sftp, remote_path)
+
+        # make sure the remote directory is empty
+        sftp.dir.entries(remote_path).each do |entry|
+          next if entry.name == "." || entry.name == ".."
+
+          path_value = remote_path + File::SEPARATOR + entry.name
+          UI.message("entry #{path_value}")
+          begin
+            if entry.directory?
+              remote_rmdir(sftp, path_value)
+            else
+              sftp.remove!(path_value)
+            end
+          rescue Net::SFTP::StatusException => e
+            UI.user_error!("could not delete file #{path_value}: #{e.message}")
+          end
+        end
+
+        begin
+          sftp.rmdir!(remote_path)
+        rescue Net::SFTP::StatusException => e
+          UI.user_error!("Could not delete remote directory #{remote_path}: #{e.message}")
+        end
+
+        # check for existence again
+        folder_exists = remote_dir_exists?(sftp, remote_path)
+        UI.user_error!("remote folder #{remote_path} still exists after deletion") if folder_exists
+      end
+
       def self.remote_dir_exists?(sftp, remote_path)
         UI.message("Checking remote directory #{remote_path}")
         attrs = sftp.stat!(remote_path)

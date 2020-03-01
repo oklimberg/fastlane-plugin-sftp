@@ -16,6 +16,10 @@ before_script:
   - sudo mkdir -p /home/sftp_test/.ssh/
   - sudo mkdir -p /home/sftp_test/existing_upload_folder/
   - sudo chown sftp_test:sftp_test /home/sftp_test/existing_upload_folder
+  - sudo mkdir -p /home/sftp_test/non_empty_folder/subfolder
+  - sudo touch /home/sftp_test/non_empty_folder/old.txt
+  - sudo touch /home/sftp_test/non_empty_folder/subfolder/old.txt
+  - sudo chown -R sftp_test:sftp_test /home/sftp_test/non_empty_folder
   - sudo mkdir -p /var/ftp/sftp_test/
   - sudo chown sftp_test:sftp_test /var/ftp/sftp_test/
   - sudo mkdir -p /home/sftp_test/download/sub_folder

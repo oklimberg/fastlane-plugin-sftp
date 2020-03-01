@@ -68,6 +68,15 @@ module Fastlane
         return [].concat(general_options).concat(
           [
             FastlaneCore::ConfigItem.new(
+              key: :delete_target_dir,
+              short_option: '-b',
+              optional: true,
+              env_name: 'DELETE_TARGET_DIR',
+              type: Boolean,
+              description: 'Specify, if an existing target folder should be deleted prior to uploading files',
+              default_value: false
+            ),
+            FastlaneCore::ConfigItem.new(
               key: :target_dir,
               short_option: '-x',
               description: 'target path on the server'

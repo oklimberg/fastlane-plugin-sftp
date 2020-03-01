@@ -25,6 +25,7 @@ module Fastlane
       attr_accessor :target_dir
       attr_accessor :root_path
       attr_accessor :files
+      attr_accessor :delete_target_dir
 
       def initialize(options)
         self.options = options unless options.nil?
@@ -36,6 +37,7 @@ module Fastlane
         self.rsa_keypath_passphrase = options[:server_key_passphrase]
         self.files = options[:file_paths]
         self.target_dir = options[:target_dir]
+        self.delete_target_dir = options[:delete_target_dir]
       end
 
       #
@@ -50,6 +52,7 @@ module Fastlane
         UI.message('Uploading files...')
 
         session.sftp.connect do |sftp|
+          Helper::SftpHelper.remote_rmdir(sftp, target_dir) if delete_target_dir
           Helper::SftpHelper.remote_mkdir(sftp, target_dir)
           uploads = []
           files.each do |file|
