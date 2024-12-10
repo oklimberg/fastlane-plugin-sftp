@@ -35,7 +35,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency('rake')
   spec.add_development_dependency('rubocop')
   spec.add_development_dependency('rubocop-require_tools')
-  spec.add_development_dependency('simplecov')
+  spec.add_development_dependency('simplecov', '>= 0.22.0')
   spec.add_development_dependency('fastlane', '>= 2.116.0')
   spec.add_development_dependency('coveralls')
 end
