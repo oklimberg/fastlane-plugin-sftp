@@ -1,7 +1,7 @@
 # os: osx # enable this if you need macOS support
 language: ruby
 rvm:
-  - 2.3.7
+  - 3.2.0
 
 addons:
   hosts:
