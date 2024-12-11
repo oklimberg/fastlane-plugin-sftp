@@ -68,7 +68,7 @@ module Fastlane
 
           # Lists the entries in a directory for verification
           sftp.dir.foreach(target_dir) do |entry|
-            UI.message(entry.longname)
+#            UI.message(entry.longname)
           end
         end
         session.close
