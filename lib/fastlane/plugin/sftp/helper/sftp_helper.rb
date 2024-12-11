@@ -73,7 +73,7 @@ module Fastlane
       end
 
       def self.remote_mkdir(sftp, remote_path)
-        return if remote_dir_exists?(sftp, remote_path)
+        return if remote_path.nil? || remote_path.empty? || remote_dir_exists?(sftp, remote_path)
 
         path_parts = Pathname(remote_path).each_filename.to_a
         UI.message("Pathparts = #{path_parts}")
