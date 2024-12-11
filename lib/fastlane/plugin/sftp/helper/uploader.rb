@@ -67,9 +67,9 @@ module Fastlane
           uploads.each(&:wait)
 
           # Lists the entries in a directory for verification
-          sftp.dir.foreach(target_dir) do |entry|
+#          sftp.dir.foreach(target_dir) do |entry|
 #            UI.message(entry.longname)
-          end
+#          end
         end
         session.close
         return true
