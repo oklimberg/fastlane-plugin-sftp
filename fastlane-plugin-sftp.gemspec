@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('bcrypt_pbkdf')
   spec.add_dependency('ed25519')
   spec.add_dependency('net-sftp')
-  spec.add_dependency('net-ssh', '~> 7.2.0')
+  spec.add_dependency('net-ssh', '~> 7.3.0')
 
   spec.add_development_dependency('bundler')
   spec.add_development_dependency('coveralls')
