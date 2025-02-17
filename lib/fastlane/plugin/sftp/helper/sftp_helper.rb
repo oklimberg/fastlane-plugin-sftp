@@ -59,7 +59,7 @@ module Fastlane
       # @param local_file_path
       def self.check_file(local_file_path)
         if File.exist?(local_file_path)
-          UI.verbose('File found at ' + local_file_path)
+          UI.verbose("File found at #{local_file_path}")
           return true
         else
           UI.important("File at given path #{local_file_path} does not exist. File will be ignored")
