@@ -86,9 +86,9 @@ module Fastlane
         UI.success('Loading remote file:')
         sftp.download(remote_file_path, local_file_path) do |event, _uploader, *_args|
           case event
-          when :open then
+          when :open
             UI.message("starting download of file #{remote_file_path} to #{local_file_path}")
-          when :finish then
+          when :finish
             UI.success("download of file #{remote_file_path} to #{local_file_path} successful")
           end
         end

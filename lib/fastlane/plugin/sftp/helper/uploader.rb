@@ -82,16 +82,16 @@ module Fastlane
         UI.message("starting upload of #{type} #{local_file_path} to #{remote_file_path}")
         sftp.upload(local_file_path, remote_file_path) do |event, _uploader, *args|
           case event
-          when :mkdir then
+          when :mkdir
             # args[0] : remote path name
             UI.message("creating directory #{args[0]}")
-          when :open then
+          when :open
             file = args[0]
             UI.message("starting upload of #{file.local} to #{file.remote}")
-          when :close then
+          when :close
             file = args[0]
             UI.message("finished with #{file.remote}")
-          when :finish then
+          when :finish
             UI.success("upload of #{type} #{local_file_path} to #{remote_file_path} successful")
           end
         end
