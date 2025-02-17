@@ -51,7 +51,7 @@ module Fastlane
             }
           )
         end
-        return Net::SSH.start(host, user, options)
+        Net::SSH.start(host, user, options)
       end
 
       # Check file existence locally
@@ -60,17 +60,17 @@ module Fastlane
       def self.check_file(local_file_path)
         if File.exist?(local_file_path)
           UI.verbose("File found at #{local_file_path}")
-          return true
+          true
         else
           UI.important("File at given path #{local_file_path} does not exist. File will be ignored")
-          return false
+          false
         end
       end
 
       def self.get_target_file_path(source_file_path, target_dir)
         return File.basename(source_file_path) if target_dir.nil? || target_dir.empty?
 
-        return File.join(target_dir, File.basename(source_file_path))
+        File.join(target_dir, File.basename(source_file_path))
       end
 
       def self.remote_mkdir(sftp, remote_path)
@@ -130,14 +130,14 @@ module Fastlane
         UI.message("Checking remote directory #{remote_path}")
         attrs = sftp.stat!(remote_path)
         UI.user_error!("Path #{remote_path} is not a directory") unless attrs.directory?
-        return true
+        true
       rescue Net::SFTP::StatusException => e
         # directory does not exist, we have to create it
         codes = Net::SFTP::Constants::StatusCodes
         raise if e.code != codes::FX_NO_SUCH_FILE && e.code != codes::FX_NO_SUCH_PATH
 
         UI.message("Remote directory #{remote_path} does not exist")
-        return false
+        false
       end
 
       def self.load_rsa_key(rsa_keypath)
@@ -149,7 +149,7 @@ module Fastlane
         else
           UI.user_error!("Failed to load RSA key... #{rsa_keypath}")
         end
-        return rsa_key
+        rsa_key
       end
     end
   end

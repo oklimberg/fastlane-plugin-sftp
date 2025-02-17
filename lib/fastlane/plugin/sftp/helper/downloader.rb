@@ -60,7 +60,7 @@ module Fastlane
           end
         end
         session.close
-        return true
+        true
       end
 
       private
@@ -89,7 +89,7 @@ module Fastlane
             UI.message("download for path #{source} failed: #{e}")
           end
         end
-        return downloads
+        downloads
       end
 
       # Downloads remote file
@@ -99,7 +99,7 @@ module Fastlane
       # @param [String] local_file_path
       def download_file(sftp, remote_file_path, local_file_path)
         UI.success('Loading remote file:')
-        return sftp.download(remote_file_path, local_file_path) do |event, _uploader, *_args|
+        sftp.download(remote_file_path, local_file_path) do |event, _uploader, *_args|
           case event
           when :open then
             UI.message("starting download of file #{remote_file_path} to #{local_file_path}")

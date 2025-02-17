@@ -76,7 +76,7 @@ module Fastlane
           end
         end
         session.close
-        return true
+        true
       end
 
       private
@@ -93,7 +93,7 @@ module Fastlane
                  'folder'
                end
         UI.message("starting upload of #{type} #{local_file_path} to #{remote_file_path}")
-        return sftp.upload(local_file_path, remote_file_path) do |event, _uploader, *args|
+        sftp.upload(local_file_path, remote_file_path) do |event, _uploader, *args|
           case event
           when :mkdir then
             # args[0] : remote path name

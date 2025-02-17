@@ -7,7 +7,7 @@ module Fastlane
     # Provides available options for the commands generator
     class Options
       def self.general_options
-        return [
+        [
           FastlaneCore::ConfigItem.new(
             key: :server_url,
             short_option: '-r',
@@ -67,7 +67,7 @@ module Fastlane
       end
 
       def self.available_options_upload
-        return [].concat(general_options).concat(
+        [].concat(general_options).concat(
           [
             FastlaneCore::ConfigItem.new(
               key: :delete_target_dir,
@@ -99,7 +99,7 @@ module Fastlane
       end
 
       def self.available_options_download
-        return [].concat(general_options).concat(
+        [].concat(general_options).concat(
           [
             FastlaneCore::ConfigItem.new(
               key: :target_dir,
