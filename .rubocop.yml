@@ -1,165 +1,46 @@
----
-Style/MultipleComparison:
-  Enabled: false
-Style/PercentLiteralDelimiters:
-  Enabled: false
-Style/ClassCheck:
-  EnforcedStyle: kind_of?
-Style/FrozenStringLiteralComment:
-  Enabled: false
-Style/SafeNavigation:
-  Enabled: false
-Performance/RegexpMatch:
-  Enabled: false
-Performance/StringReplacement:
-  Enabled: false
-Style/NumericPredicate:
-  Enabled: false
-Metrics/BlockLength:
-  Enabled: false
-Metrics/ModuleLength:
-  Enabled: false
-Style/VariableNumber:
-  Enabled: false
-Style/MethodMissing:
-  Enabled: false
-MultilineBlockChain:
-  Enabled: false
-Style/NumericLiteralPrefix:
-  Enabled: false
-Style/TernaryParentheses:
-  Enabled: false
-Style/EmptyMethod:
-  Enabled: false
-Style/BracesAroundHashParameters:
-  Enabled: false
-Lint/UselessAssignment:
-  Exclude:
-  - "**/spec/**/*"
-Layout/IndentHash:
-  Enabled: false
-Layout/AlignHash:
-  Enabled: false
-Layout/DotPosition:
-  Enabled: false
-Style/DoubleNegation:
-  Enabled: false
-Style/SymbolArray:
-  Enabled: false
-Layout/IndentHeredoc:
-  Enabled: false
-Style/MixinGrouping:
-  Exclude:
-  - "**/spec/**/*"
-Lint/HandleExceptions:
-  Enabled: false
-Lint/UnusedBlockArgument:
-  Enabled: false
-Lint/AmbiguousBlockAssociation:
-  Enabled: false
-Style/GlobalVars:
-  Enabled: false
-Style/ClassAndModuleChildren:
-  Enabled: false
-Style/SpecialGlobalVars:
-  Enabled: false
+
+# Configuration parameters: AllowedMethods, AllowedPatterns, CountRepeatedAttributes.
 Metrics/AbcSize:
-  Enabled: false
-Metrics/MethodLength:
-  Enabled: false
-Metrics/CyclomaticComplexity:
-  Enabled: false
-Style/WordArray:
-  MinSize: 19
-Style/SignalException:
-  Enabled: false
-Style/RedundantReturn:
-  Enabled: false
-Style/IfUnlessModifier:
-  Enabled: false
-Style/AndOr:
-  Enabled: true
-  EnforcedStyle: conditionals
+  Max: 35
+
+# Configuration parameters: CountComments, CountAsOne, AllowedMethods, AllowedPatterns.
+# AllowedMethods: refine
+Metrics/BlockLength:
+  Max: 125
+
+# Configuration parameters: CountComments, CountAsOne.
 Metrics/ClassLength:
-  Max: 320
-Metrics/LineLength:
-  Max: 370
-Metrics/ParameterLists:
-  Max: 17
+  Max: 115
+
+# Configuration parameters: AllowedMethods, AllowedPatterns.
+Metrics/CyclomaticComplexity:
+  Max: 9
+
+# Configuration parameters: CountComments, CountAsOne, AllowedMethods, AllowedPatterns.
+Metrics/MethodLength:
+  Max: 57
+
+# Offense count: 2
+# Configuration parameters: AllowedMethods, AllowedPatterns.
 Metrics/PerceivedComplexity:
-  Max: 18
-Style/GuardClause:
-  Enabled: false
-Style/StringLiterals:
-  Enabled: false
-Style/ConditionalAssignment:
-  Enabled: false
-Style/RedundantSelf:
-  Enabled: false
-Lint/UnusedMethodArgument:
-  Enabled: false
-Lint/ParenthesesAsGroupedExpression:
-  Exclude:
-  - "**/spec/**/*"
-Style/PredicateName:
-  Enabled: false
-Style/PerlBackrefs:
-  Enabled: false
-Layout/SpaceAroundOperators:
-  Exclude:
-  - "**/spec/actions_specs/xcodebuild_spec.rb"
-AllCops:
-  TargetRubyVersion: 2.0
-  Include:
-  - "*/lib/assets/*Template"
-  - "*/lib/assets/*TemplateAndroid"
-  Exclude:
-  - "**/lib/assets/custom_action_template.rb"
-  - "./vendor/**/*"
-  - "**/lib/assets/DefaultFastfileTemplate"
-  - "**/lib/assets/MatchfileTemplate"
-  - "**/spec/fixtures/broken_files/broken_file.rb"
-Style/FileName:
-  Exclude:
-  - "**/Dangerfile"
-  - "**/Brewfile"
-  - "**/Gemfile"
-  - "**/Podfile"
-  - "**/Rakefile"
-  - "**/Fastfile"
-  - "**/Deliverfile"
-  - "**/Snapfile"
-  - "**/*.gemspec"
+  Max: 10
+
+# Configuration parameters: AllowedConstants.
 Style/Documentation:
   Enabled: false
-Style/MutableConstant:
+
+# This cop supports safe autocorrection (--autocorrect).
+Style/ExpandPathArguments:
   Enabled: false
-Style/ZeroLengthPredicate:
-  Enabled: false
-Style/IfInsideElse:
-  Enabled: false
-Style/CollectionMethods:
-  Enabled: false
-Style/MethodCallWithArgsParentheses:
-  Enabled: true
-  IgnoredMethods:
-  - require
-  - require_relative
-  - fastlane_require
-  - gem
-  - program
-  - command
-  - raise
-  - attr_accessor
-  - attr_reader
-  - desc
-  - lane
-  - private_lane
-  - platform
-  - to
-  - describe
-  - it
-  - be
-  - context
-  - before
-  - after
+
+# This cop supports safe autocorrection (--autocorrect).
+# Configuration parameters: MinSize.
+# SupportedStyles: percent, brackets
+Style/SymbolArray:
+  EnforcedStyle: brackets
+
+# This cop supports safe autocorrection (--autocorrect).
+# Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, AllowedPatterns, SplitStrings.
+# URISchemes: http, https
+Layout/LineLength:
+  Max: 180
