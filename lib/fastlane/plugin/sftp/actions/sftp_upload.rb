@@ -37,9 +37,11 @@ module Fastlane
         'oklimberg'
       end
 
+      # rubocop:disable Lint/UnusedMethodArgument
       def self.is_supported?(platform)
         true
       end
+      # rubocop:enable Lint/UnusedMethodArgument
 
       def self.category
         :misc
