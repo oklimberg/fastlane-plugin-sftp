@@ -38,10 +38,12 @@ module Fastlane
       end
 
       # rubocop:disable Lint/UnusedMethodArgument
+      # rubocop:disable Naming/PredicateName
       def self.is_supported?(platform)
         true
       end
       # rubocop:enable Lint/UnusedMethodArgument
+      # rubocop:enable Naming/PredicateName
 
       def self.category
         :misc
