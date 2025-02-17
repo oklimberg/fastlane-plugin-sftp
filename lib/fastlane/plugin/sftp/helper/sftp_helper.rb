@@ -35,18 +35,22 @@ module Fastlane
         end
         if !rsa_key.nil?
           UI.message('Logging in with RSA key...')
-          options = options.merge({
-            key_data: rsa_key,
-            keys_only: true,
-            passphrase: rsa_keypath_passphrase,
-            auth_methods: ["publickey"]
-          })
+          options = options.merge(
+            {
+              key_data: rsa_key,
+              keys_only: true,
+              passphrase: rsa_keypath_passphrase,
+              auth_methods: ["publickey"]
+            }
+          )
         else
           UI.message('Logging in with username/password...')
-          options = options.merge({
-            password: password,
-            auth_methods: ["password"]
-          })
+          options = options.merge(
+            {
+              password: password,
+              auth_methods: ["password"]
+            }
+          )
         end
         return Net::SSH.start(host, user, options)
       end
