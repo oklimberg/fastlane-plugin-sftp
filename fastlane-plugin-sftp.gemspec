@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-lib = File.expand_path("../lib", __FILE__)
+lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 require 'fastlane/plugin/sftp/version'
@@ -12,11 +12,11 @@ Gem::Specification.new do |spec|
   spec.email                 = 'oklimberg@gmail'
 
   spec.summary               = 'Plugin to upload files via SFTP'
-  spec.homepage              = "https://github.com/oklimberg/fastlane-plugin-sftp"
-  spec.license               = "MIT"
+  spec.homepage              = 'https://github.com/oklimberg/fastlane-plugin-sftp'
+  spec.license               = 'MIT'
 
   spec.required_ruby_version = '>= 2.6.0'
-  spec.files                 = Dir["lib/**/*"] + %w(README.md LICENSE)
+  spec.files                 = Dir['lib/**/*'] + %w(README.md LICENSE)
   spec.test_files            = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths         = ['lib']
 

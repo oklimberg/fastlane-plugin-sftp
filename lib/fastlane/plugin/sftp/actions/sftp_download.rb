@@ -28,7 +28,7 @@ module Fastlane
       end
 
       def self.details
-        "More information: https://github.com/oklimberg/fastlane-plugin-sftp/"
+        'More information: https://github.com/oklimberg/fastlane-plugin-sftp/'
       end
 
       def self.available_options

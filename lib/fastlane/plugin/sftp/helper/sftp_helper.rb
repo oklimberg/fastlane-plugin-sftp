@@ -5,7 +5,7 @@ require 'net/ssh'
 require 'net/sftp'
 
 module Fastlane
-  UI = FastlaneCore::UI unless Fastlane.const_defined?("UI")
+  UI = FastlaneCore::UI unless Fastlane.const_defined?('UI')
 
   module Helper
     class SftpHelper
@@ -23,7 +23,7 @@ module Fastlane
         end
 
         logging_level = :warn
-        logging_level = :debug if ENV["DEBUG"] == "1"
+        logging_level = :debug if ENV['DEBUG'] == '1'
         options = {
           verbose: logging_level,
           non_interactive: true
@@ -39,7 +39,7 @@ module Fastlane
               key_data: rsa_key,
               keys_only: true,
               passphrase: rsa_keypath_passphrase,
-              auth_methods: ["publickey"]
+              auth_methods: ['publickey']
             }
           )
         else
@@ -47,7 +47,7 @@ module Fastlane
           options = options.merge(
             {
               password: password,
-              auth_methods: ["password"]
+              auth_methods: ['password']
             }
           )
         end
@@ -78,7 +78,7 @@ module Fastlane
 
         path_parts = Pathname(remote_path).each_filename.to_a
         UI.message("Pathparts = #{path_parts}")
-        path_value = remote_path.start_with?("/") ? "" : "."
+        path_value = remote_path.start_with?('/') ? '' : '.'
         path_parts.each do |path|
           begin
             path_value = path_value + File::SEPARATOR + path
@@ -100,7 +100,7 @@ module Fastlane
 
         # make sure the remote directory is empty
         sftp.dir.entries(remote_path).each do |entry|
-          next if entry.name == "." || entry.name == ".."
+          next if entry.name == '.' || entry.name == '..'
 
           path_value = remote_path + File::SEPARATOR + entry.name
           UI.message("entry #{path_value}")

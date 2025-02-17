@@ -75,7 +75,7 @@ module Fastlane
             attrs = sftp.stat!(source)
             if attrs.directory?
               children = []
-              sftp.dir.glob(source, "*") do |child|
+              sftp.dir.glob(source, '*') do |child|
                 remote_path = File.join(source, child.name)
                 children.push(remote_path)
               end

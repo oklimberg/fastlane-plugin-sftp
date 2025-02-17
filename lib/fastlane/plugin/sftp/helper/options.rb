@@ -90,7 +90,7 @@ module Fastlane
               description: 'List of files/folders to upload',
               type: Array,
               verify_block: proc do |value|
-                UI.user_error!("you must provide at least one file to upload") if value.empty?
+                UI.user_error!('you must provide at least one file to upload') if value.empty?
                 value.each { |entry| UI.user_error!("file '#{entry}' does not exist") unless File.exist?(entry) }
               end
             )
@@ -113,7 +113,7 @@ module Fastlane
               description: 'List of remote files/folders to download',
               type: Array,
               verify_block: proc do |value|
-                UI.user_error!("you must provide at least one file to download") if value.empty?
+                UI.user_error!('you must provide at least one file to download') if value.empty?
               end
             )
           ]
