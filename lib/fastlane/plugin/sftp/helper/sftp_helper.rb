@@ -134,6 +134,7 @@ module Fastlane
         # directory does not exist, we have to create it
         codes = Net::SFTP::Constants::StatusCodes
         raise if e.code != codes::FX_NO_SUCH_FILE && e.code != codes::FX_NO_SUCH_PATH
+
         UI.message("Remote directory #{remote_path} does not exist")
         return false
       end
