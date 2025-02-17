@@ -87,11 +87,11 @@ module Fastlane
       # @param [String] local_file_path
       # @param [String] remote_file_path
       def upload_file(sftp, local_file_path, remote_file_path)
-        if File.file?(local_file_path)
-          type = "file"
-        else
-          type = "folder"
-        end
+        type = if File.file?(local_file_path)
+                 "file"
+               else
+                 "folder"
+               end
         UI.message("starting upload of #{type} #{local_file_path} to #{remote_file_path}")
         return sftp.upload(local_file_path, remote_file_path) do |event, _uploader, *args|
           case event
