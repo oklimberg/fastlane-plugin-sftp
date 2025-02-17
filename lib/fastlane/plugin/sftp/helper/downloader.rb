@@ -85,7 +85,7 @@ module Fastlane
               download = download_file(sftp, source, Helper::SftpHelper.get_target_file_path(source, target_dir))
               downloads.push(download) unless download.nil?
             end
-          rescue => e
+          rescue StandardError => e
             UI.message("download for path #{source} failed: #{e}")
           end
         end
