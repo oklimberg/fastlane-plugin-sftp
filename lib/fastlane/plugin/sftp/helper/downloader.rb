@@ -69,25 +69,23 @@ module Fastlane
         Dir.mkdir(target_dir) unless Dir.exist?(target_dir)
         downloads = []
         source_files.each do |source|
-          begin
-            UI.message('Checking remote file')
-            UI.message("remote path #{source}")
-            attrs = sftp.stat!(source)
-            if attrs.directory?
-              children = []
-              sftp.dir.glob(source, '*') do |child|
-                remote_path = File.join(source, child.name)
-                children.push(remote_path)
-              end
-              new_target = File.join(target_dir, File.basename(source))
-              downloads.concat(sftp_download(sftp, children, new_target))
-            else
-              download = download_file(sftp, source, Helper::SftpHelper.get_target_file_path(source, target_dir))
-              downloads.push(download) unless download.nil?
+          UI.message('Checking remote file')
+          UI.message("remote path #{source}")
+          attrs = sftp.stat!(source)
+          if attrs.directory?
+            children = []
+            sftp.dir.glob(source, '*') do |child|
+              remote_path = File.join(source, child.name)
+              children.push(remote_path)
             end
-          rescue StandardError => e
-            UI.message("download for path #{source} failed: #{e}")
+            new_target = File.join(target_dir, File.basename(source))
+            downloads.concat(sftp_download(sftp, children, new_target))
+          else
+            download = download_file(sftp, source, Helper::SftpHelper.get_target_file_path(source, target_dir))
+            downloads.push(download) unless download.nil?
           end
+        rescue StandardError => e
+          UI.message("download for path #{source} failed: #{e}")
         end
         downloads
       end

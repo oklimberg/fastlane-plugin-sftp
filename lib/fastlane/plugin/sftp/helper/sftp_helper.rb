@@ -80,14 +80,12 @@ module Fastlane
         UI.message("Pathparts = #{path_parts}")
         path_value = remote_path.start_with?('/') ? '' : '.'
         path_parts.each do |path|
-          begin
-            path_value = path_value + File::SEPARATOR + path
-            UI.message("creating #{path_value}")
-            sftp.mkdir!(path_value)
-          rescue Net::SFTP::StatusException => e
-            # ignoring all errors while creating sub paths
-            UI.message("operation failed: #{e.message}")
-          end
+          path_value = path_value + File::SEPARATOR + path
+          UI.message("creating #{path_value}")
+          sftp.mkdir!(path_value)
+        rescue Net::SFTP::StatusException => e
+          # ignoring all errors while creating sub paths
+          UI.message("operation failed: #{e.message}")
         end
 
         # check for existence again
