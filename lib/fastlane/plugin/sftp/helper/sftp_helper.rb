@@ -98,7 +98,7 @@ module Fastlane
 
         # make sure the remote directory is empty
         sftp.dir.entries(remote_path).each do |entry|
-          next if entry.name == '.' || entry.name == '..'
+          next if ['.', '..'].include?(entry.name)
 
           path_value = remote_path + File::SEPARATOR + entry.name
           UI.message("entry #{path_value}")
