@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe Fastlane::Helper::SftpHelper do
   describe '#check_file' do
     it 'check file exists: true' do

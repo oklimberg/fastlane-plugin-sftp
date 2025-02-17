@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'fastlane_core'
 
 module Fastlane

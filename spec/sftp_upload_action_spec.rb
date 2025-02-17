@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe Fastlane::Actions::SftpUploadAction do
   after(:each) do
     ENV["DEBUG"] = "0"
