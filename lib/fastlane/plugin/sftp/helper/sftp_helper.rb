@@ -71,11 +71,9 @@ module Fastlane
       end
 
       def self.get_target_file_path(source_file_path, target_dir)
-        if target_dir.nil? || target_dir.empty?
-          return File.basename(source_file_path)
-        else
-          return File.join(target_dir, File.basename(source_file_path))
-        end
+        return File.basename(source_file_path) if target_dir.nil? || target_dir.empty?
+
+        return File.join(target_dir, File.basename(source_file_path))
       end
 
       def self.remote_mkdir(sftp, remote_path)
