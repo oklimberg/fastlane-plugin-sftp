@@ -71,8 +71,8 @@ module Fastlane
             sftp.dir.foreach(target_dir) do |entry|
               UI.message(entry.longname)
             end
-          rescue => exception
-            UI.message("Failed to load files: #{exception}")
+          rescue => e
+            UI.message("Failed to load files: #{e}")
           end
         end
         session.close
