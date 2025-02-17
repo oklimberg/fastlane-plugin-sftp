@@ -12,21 +12,8 @@ module Fastlane
   module Sftp
     # Responsible for performing download SFTP operation
     class Downloader
-      attr_accessor :options
-
-      #
-      # These want to be an input parameters:
-      #
-
-      attr_accessor :host
-      attr_accessor :port
-      attr_accessor :user
-      attr_accessor :password
-      attr_accessor :rsa_keypath
-      attr_accessor :rsa_keypath_passphrase
-      attr_accessor :target_dir
-      attr_accessor :root_path
-      attr_accessor :files
+      attr_accessor :options, :host, :port, :user, :password, :rsa_keypath,
+                    :rsa_keypath_passphrase, :target_dir, :root_path, :files
 
       def initialize(options)
         self.options = options unless options.nil?
