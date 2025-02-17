@@ -61,9 +61,7 @@ module Fastlane
             next unless Helper::SftpHelper.check_file(file)
 
             re = Helper::SftpHelper.get_target_file_path(file, target_dir)
-            if File.directory?(file)
-              Helper::SftpHelper.remote_mkdir(sftp, re)
-            end
+            Helper::SftpHelper.remote_mkdir(sftp, re) if File.directory?(file)
             uploads.push(upload_file(sftp, file, re))
           end
           uploads.each(&:wait)

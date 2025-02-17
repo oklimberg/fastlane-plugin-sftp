@@ -14,9 +14,8 @@ module Fastlane
       #
 
       def self.login(host, port, user, password, rsa_keypath, rsa_keypath_passphrase)
-        if host.nil? || user.nil? || (password.nil? && rsa_keypath.nil?)
-          UI.user_error!('server_url, server_user and server_password or server_key must be set')
-        end
+        missing_param = host.nil? || user.nil? || (password.nil? && rsa_keypath.nil?)
+        UI.user_error!('server_url, server_user and server_password or server_key must be set') if missing_param
 
         if rsa_keypath
           # will raise an excetion if file is empty
@@ -24,9 +23,7 @@ module Fastlane
         end
 
         logging_level = :warn
-        if ENV["DEBUG"] == "1"
-          logging_level = :debug
-        end
+        logging_level = :debug if ENV["DEBUG"] == "1"
         options = {
           verbose: logging_level,
           non_interactive: true
