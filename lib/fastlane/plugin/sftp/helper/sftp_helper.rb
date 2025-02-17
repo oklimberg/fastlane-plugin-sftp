@@ -13,6 +13,7 @@ module Fastlane
       # as `Helper::SftpHelper.your_method`
       #
 
+      # rubocop:disable Metrics/ParameterLists
       def self.login(host, port, user, password, rsa_keypath, rsa_keypath_passphrase)
         missing_param = host.nil? || user.nil? || (password.nil? && rsa_keypath.nil?)
         UI.user_error!('server_url, server_user and server_password or server_key must be set') if missing_param
@@ -53,6 +54,7 @@ module Fastlane
         end
         Net::SSH.start(host, user, options)
       end
+      # rubocop:enable Metrics/ParameterLists
 
       # Check file existence locally
       #
