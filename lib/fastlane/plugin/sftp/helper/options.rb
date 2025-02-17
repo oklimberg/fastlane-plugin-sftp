@@ -79,6 +79,7 @@ module Fastlane
             FastlaneCore::ConfigItem.new(
               key: :target_dir,
               short_option: '-x',
+              optional: true,
               description: 'target path on the server'
             ),
             FastlaneCore::ConfigItem.new(

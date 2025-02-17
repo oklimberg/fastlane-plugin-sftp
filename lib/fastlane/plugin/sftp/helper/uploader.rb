@@ -66,9 +66,13 @@ module Fastlane
           end
           uploads.each(&:wait)
 
-          # Lists the entries in a directory for verification
-          sftp.dir.foreach(target_dir) do |entry|
-            UI.message(entry.longname)
+          begin
+              # Lists the entries in a directory for verification
+            sftp.dir.foreach(target_dir) do |entry|
+              UI.message(entry.longname)
+            end
+          rescue => exception
+            UI.message("Failed to load files: #{exception}")
           end
         end
         session.close

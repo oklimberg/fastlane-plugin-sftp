@@ -49,6 +49,20 @@ describe Fastlane::Actions::SftpUploadAction do
       expect(File).to exist("/var/ftp/sftp_test/super/deep/folder/structure/target/dir/test_folder/test_file_04.txt")
       expect(File).to exist("/var/ftp/sftp_test/super/deep/folder/structure/target/dir/test_folder/test_sub_folder/test_file_05.txt")
     end
+    
+    it 'uploads files to root of an SFTP server, without target dir specified' do
+      Fastlane::Actions::SftpUploadAction.run(
+        server_url: "sftp.server.example",
+        server_user: "sftp_test",
+        server_password: "password",
+        file_paths: ["assets/test_file_01.txt", "assets/test_file_02.txt", "assets/test_folder"]
+      )
+      expect(File).to exist("/home/sftp_test/test_file_01.txt")
+      expect(File).to exist("/home/sftp_test/test_file_02.txt")
+      expect(File).to exist("/home/sftp_test/test_folder/test_file_03.txt")
+      expect(File).to exist("/home/sftp_test/test_folder/test_file_04.txt")
+      expect(File).to exist("/home/sftp_test/test_folder/test_sub_folder/test_file_05.txt")
+    end
 
     it 'uploads files to a SFTP server into existing folder' do
       # ENV["DEBUG"] = "1"
