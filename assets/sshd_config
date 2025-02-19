@@ -2,56 +2,59 @@
 # Managed by Chef! :heart_eyes_cat:
 # See the sshd_config(5) manpage for details
 
+# Basic SSH settings
 Port 22
 Port 34567
-
 ListenAddress 0.0.0.0
 ListenAddress ::
-
 Protocol 2
 
+# Host Keys
 HostKey /etc/ssh/ssh_host_rsa_key
 HostKey /etc/ssh/ssh_host_dsa_key
 HostKey /etc/ssh/ssh_host_ecdsa_key
 
+# Security
 UsePrivilegeSeparation yes
+StrictModes yes
+PermitRootLogin no
+MaxStartups 100
 
-KeyRegenerationInterval 3600
-ServerKeyBits 768
+# Authentication
+#RSAAuthentication yes
+PubkeyAuthentication yes
+PasswordAuthentication yes
+PermitEmptyPasswords no
+ChallengeResponseAuthentication no
+IgnoreRhosts yes
+#RhostsRSAAuthentication no
+HostbasedAuthentication no
+AllowUsers sftp_test
 
+# SFTP subsystem
+Subsystem sftp /usr/lib/openssh/sftp-server
+
+# Logging
 SyslogFacility AUTH
 LogLevel DEBUG2
 
+# Connection settings
+TCPKeepAlive yes
+ClientAliveInterval 30
+ClientAliveCountMax 99999
+
+# PAM
+UsePAM yes
+
+# Environment
+AcceptEnv LANG LC_*
+
+# Misc
 LoginGraceTime 120
-PermitRootLogin yes
-StrictModes yes
-
-RSAAuthentication yes
-PubkeyAuthentication yes
-
-IgnoreRhosts yes
-RhostsRSAAuthentication no
-HostbasedAuthentication no
-
-PermitEmptyPasswords no
-
-ChallengeResponseAuthentication no
-
+KeyRegenerationInterval 3600
+ServerKeyBits 768
 X11Forwarding yes
 X11DisplayOffset 10
 X11UseLocalhost no
 PrintMotd no
 PrintLastLog yes
-TCPKeepAlive yes
-
-AcceptEnv LANG LC_*
-
-Subsystem sftp /usr/lib/openssh/sftp-server
-
-UsePAM yes
-
-# Effectively disables SSH timeouts
-ClientAliveInterval 30
-ClientAliveCountMax 99999
-
-MaxStartups 100
