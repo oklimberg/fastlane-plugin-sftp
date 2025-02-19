@@ -56,7 +56,12 @@ jobs:
         sudo cp -f assets/sshd_config /etc/ssh/
         sudo cp -f assets/authorized_keys /home/sftp_test/.ssh/
         chmod -R go= assets/keys
+
+        # Create .ssh directory for current user and add known hosts
+        mkdir -p ~/.ssh
         ssh-keyscan -H sftp.server.example >> ~/.ssh/known_hosts
+
+        # Restart the SSH service
         sudo service ssh restart
 
     - name: Run tests
