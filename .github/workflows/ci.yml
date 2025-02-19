@@ -31,9 +31,8 @@ jobs:
         sudo adduser --disabled-password --gecos "SFTP Test" sftp_test
         echo "sftp_test:password" | sudo chpasswd
 
-        # Setup SSH and SFTP directories with proper permissions
+        # Setup SSH and SFTP directories
         sudo mkdir -p /home/sftp_test/.ssh/
-        sudo chmod 700 /home/sftp_test/.ssh
         sudo mkdir -p /home/sftp_test/existing_upload_folder/
         sudo mkdir -p /home/sftp_test/non_empty_folder/subfolder
         sudo mkdir -p /var/ftp/sftp_test/
@@ -50,15 +49,18 @@ jobs:
         # Setup SSH configuration
         sudo cp -f assets/sshd_config /etc/ssh/
         sudo cp -f assets/authorized_keys /home/sftp_test/.ssh/
-        sudo chmod 600 /home/sftp_test/.ssh/authorized_keys
-        sudo chown -R sftp_test:sftp_test /home/sftp_test/
 
-        # Set permissions for test directories
+        # Set permissions
         sudo chown sftp_test:sftp_test /home/sftp_test/existing_upload_folder
         sudo chown -R sftp_test:sftp_test /home/sftp_test/non_empty_folder
-        sudo chown sftp_test:sftp_test /var/ftp/sftp_test/
+        sudo chown sftp_test:sftp_test /var/ftp/sftp_test
         sudo chown -R sftp_test:sftp_test /home/sftp_test/download
+        sudo chown -R sftp_test:sftp_test /home/sftp_test/.ssh
+        # sudo chown -R sftp_test:sftp_test /home/sftp_test
 
+        #sudo chmod 700 /home/sftp_test/.ssh
+        #sudo chmod 600 /home/sftp_test/.ssh/authorized_keys   
+        
         # Setup SSH for runner
         mkdir -p ~/.ssh
         chmod 700 ~/.ssh
