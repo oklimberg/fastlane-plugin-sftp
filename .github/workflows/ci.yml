@@ -1,4 +1,4 @@
-name: CI
+name: Build Status
 
 on:
   push:
@@ -31,8 +31,9 @@ jobs:
         sudo adduser --disabled-password --gecos "SFTP Test" sftp_test
         echo "sftp_test:password" | sudo chpasswd
 
-        # Setup SSH and SFTP directories
+        # Setup SSH and SFTP directories with proper permissions
         sudo mkdir -p /home/sftp_test/.ssh/
+        sudo chmod 700 /home/sftp_test/.ssh
         sudo mkdir -p /home/sftp_test/existing_upload_folder/
         sudo mkdir -p /home/sftp_test/non_empty_folder/subfolder
         sudo mkdir -p /var/ftp/sftp_test/
@@ -46,23 +47,30 @@ jobs:
         sudo touch /home/sftp_test/download/sub_folder/file_03.txt
         sudo touch /home/sftp_test/download/sub_folder/file_04.txt
 
-        # Set permissions
+        # Setup SSH configuration
+        sudo cp -f assets/sshd_config /etc/ssh/
+        sudo cp -f assets/authorized_keys /home/sftp_test/.ssh/
+        sudo chmod 600 /home/sftp_test/.ssh/authorized_keys
+        sudo chown -R sftp_test:sftp_test /home/sftp_test/
+
+        # Set permissions for test directories
         sudo chown sftp_test:sftp_test /home/sftp_test/existing_upload_folder
         sudo chown -R sftp_test:sftp_test /home/sftp_test/non_empty_folder
         sudo chown sftp_test:sftp_test /var/ftp/sftp_test/
         sudo chown -R sftp_test:sftp_test /home/sftp_test/download
 
-        # Setup SSH configuration
-        sudo cp -f assets/sshd_config /etc/ssh/
-        sudo cp -f assets/authorized_keys /home/sftp_test/.ssh/
-        chmod -R go= assets/keys
-
-        # Create .ssh directory for current user and add known hosts
+        # Setup SSH for runner
         mkdir -p ~/.ssh
+        chmod 700 ~/.ssh
+        chmod -R go= assets/keys
         ssh-keyscan -H sftp.server.example >> ~/.ssh/known_hosts
+        chmod 600 ~/.ssh/known_hosts
 
-        # Restart the SSH service
+        # Restart SSH service
         sudo service ssh restart
 
+        # Debug info
+        ls -la /home/sftp_test/.ssh/
+        sudo cat /etc/ssh/sshd_config
     - name: Run tests
       run: bundle exec rake
