@@ -1,6 +1,11 @@
 # sftp plugin
 
-[![fastlane Plugin Badge](https://rawcdn.githack.com/fastlane/fastlane/master/fastlane/assets/plugin-badge.svg)](https://rubygems.org/gems/fastlane-plugin-sftp) [![Gem](https://img.shields.io/gem/v/fastlane-plugin-sftp.svg?style=flat)](http://rubygems.org/gems/fastlane-plugin-sftp)  [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/oklimberg/fastlane-plugin-sftp/blob/master/LICENSE) [![Build Status](https://travis-ci.org/oklimberg/fastlane-plugin-sftp.svg?branch=master)](https://travis-ci.org/oklimberg/fastlane-plugin-sftp) [![Coverage Status](https://coveralls.io/repos/github/oklimberg/fastlane-plugin-sftp/badge.svg?branch=master)](https://coveralls.io/github/oklimberg/fastlane-plugin-sftp?branch=master) [![Twitter: @oklimberg](https://img.shields.io/badge/contact-@oklimberg-blue.svg?style=flat)](https://twitter.com/oklimberg)
+[![fastlane Plugin Badge](https://rawcdn.githack.com/fastlane/fastlane/master/fastlane/assets/plugin-badge.svg)](https://rubygems.org/gems/fastlane-plugin-sftp)
+[![Gem](https://img.shields.io/gem/v/fastlane-plugin-sftp.svg?style=flat)](http://rubygems.org/gems/fastlane-plugin-sftp)
+[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/oklimberg/fastlane-plugin-sftp/blob/master/LICENSE)
+[![Build Status](https://github.com/oklimberg/fastlane-plugin-sftp/actions/workflows/ci.yml/badge.svg)](https://github.com/oklimberg/fastlane-plugin-sftp/actions/workflows/ci.yml)
+[![Coverage Status](https://coveralls.io/repos/github/oklimberg/fastlane-plugin-sftp/badge.svg?branch=master)](https://coveralls.io/github/oklimberg/fastlane-plugin-sftp?branch=master)
+[![Twitter: @oklimberg](https://img.shields.io/badge/contact-@oklimberg-blue.svg?style=flat)](https://twitter.com/oklimberg)
 
 ## Getting Started
 
